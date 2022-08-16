@@ -5,11 +5,13 @@ class CraqValidator
     def initialize(questions, answers)
         @questions = []
         @errors = {}
+        answers ||= {}
 
         questions.each_with_index do |q, i| 
             @questions << Question.new(q, i, answers[:"q#{i}"])
 
             if !@questions[i].is_valid_answer?
+                puts @questions[i].inspect
                 @valid = false
                 @errors[:"q#{i}"] = @questions[i].error
             end
