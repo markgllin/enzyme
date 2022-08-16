@@ -1,7 +1,6 @@
 ######## default tags ########
 locals {
-  environment  = "staging"
-  service_name = "enzyme"
+  resource_prefix = aws_ecs_cluster.ecs_cluster.name
 }
 
 variable "environment" {
@@ -33,7 +32,7 @@ variable "cluster_name" {
 variable "container_name" {
   type        = string
   description = "Name of container in task definition"
-  default     = "helloworld"
+  default     = "enzyme-results"
 }
 
 variable "container_port" {
