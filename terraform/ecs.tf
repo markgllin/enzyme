@@ -8,10 +8,10 @@ resource "aws_ecs_cluster" "ecs_cluster" {
 }
 
 data "template_file" "td_template" {
-  template = file("task_definition.json.tpl")
+  template = file("./templates/task_definition.json.tpl")
   vars = {
     container_name = var.container_name
-    image          = var.image_url
+    image          = aws_ecr_repository.enzyme.repository_url
     container_port = var.container_port
   }
 }
@@ -19,6 +19,17 @@ data "template_file" "td_template" {
 resource "aws_ecs_task_definition" "ecs_td" {
   family                = "${var.cluster_name}-${var.container_name}-td"
   container_definitions = data.template_file.td_template.rendered
+  execution_role_arn    = aws_iam_role.ecs_task_exec_role.arn
+
+  cpu          = "256"
+  memory       = "512"
+  network_mode = "awsvpc"
+
+  requires_compatibilities = ["FARGATE"]
+
+  runtime_platform {
+    operating_system_family = "LINUX"
+  }
 }
 
 resource "aws_ecs_service" "ecs_svc" {
@@ -26,6 +37,13 @@ resource "aws_ecs_service" "ecs_svc" {
   cluster         = aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.ecs_td.arn
   desired_count   = var.desired_ecs_svc_count
+  launch_type     = "FARGATE"
+
+  network_configuration {
+    subnets          = [ aws_subnet.subnet1.id, aws_subnet.subnet2.id ]
+    security_groups  = [ aws_security_group.ecs_svc_sg.id ]
+    assign_public_ip = true
+  }
 
   load_balancer {
     container_name   = var.container_name

@@ -11,16 +11,9 @@ variable "environment" {
 
 variable "aws_region" {
   type        = string
-  default     = "us-west-2"
+  default     = "us-west-1"
   description = "Region to deploy infrastructure to."
 }
-
-variable "availability_zone" {
-  type        = string
-  default     = "us-west-2a"
-  description = "Availability zone to deploy infrastructure to."
-}
-
 
 ######## ECS Cluster ########
 variable "cluster_name" {
@@ -38,7 +31,7 @@ variable "container_name" {
 variable "container_port" {
   type        = string
   description = "Container port"
-  default     = "80"
+  default     = "8080"
 }
 
 variable "image_url" {

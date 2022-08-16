@@ -1,4 +1,4 @@
-# The below is an adapted example from Terraform documentation
+# Adapted example from Terraform documentation
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acm_certificate
 resource "tls_private_key" "pkey" {
   algorithm = "RSA"

@@ -6,14 +6,14 @@ resource "aws_vpc" "ecs_vpc" {
   resource "aws_subnet" "subnet1" {
     vpc_id                  = aws_vpc.ecs_vpc.id
     cidr_block              = "10.0.0.0/24"
-    availability_zone       = "us-west-1b"
+    availability_zone       = "us-west-1a"
     map_public_ip_on_launch = true
   }
   
   resource "aws_subnet" "subnet2" {
     vpc_id                  = aws_vpc.ecs_vpc.id
     cidr_block              = "10.0.1.0/24"
-    availability_zone       = "us-west-1c"
+    availability_zone       = "us-west-1b"
     map_public_ip_on_launch = true
   }
   
