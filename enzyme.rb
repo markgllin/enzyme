@@ -8,10 +8,9 @@ class CraqValidator
         @questions = []
         @errors = {}
         @valid = true
-        @completed = false
         answers ||= {}
 
-        check_questions(questions, answers)
+        validate(questions, answers)
     end
 
     def valid?
@@ -20,16 +19,15 @@ class CraqValidator
 
     private
 
-    def check_questions(questions, answers)
+    def validate(questions, answers)
         questions.each_with_index do |q, i| 
             @questions << Question.new(q, answers[:"q#{i}"])
 
-            next if @completed && !@questions[i].answered?
-
-            if @completed && @questions[i].answered?
-                @errors[:"q#{i}"] = ALREADY_COMPLETE
-                puts @errors.inspect
-                @valid = false
+            if @completed
+                if @questions[i].answered?
+                    @errors[:"q#{i}"] = ALREADY_COMPLETE
+                    @valid = false
+                end
                 next
             end
 
@@ -55,8 +53,6 @@ class Question
         @opts = question[:options]
         @answer = answer
         @error = nil
-
-        self.is_valid_answer?
     end
 
     def is_valid_answer?

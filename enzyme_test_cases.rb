@@ -90,26 +90,26 @@ class CraqValidatorTest < Test::Unit::TestCase
     )
   end
 
-#   description 'it is valid if complete_if is not a terminal answer and further questions are answered'
-#   def test11
-#     @questions = [
-#       { text: 'q1', options: [{ text: 'yes' }, { text: 'no', complete_if_selected: true }] },
-#       { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
-#     ]
+  description 'it is valid if complete_if is not a terminal answer and further questions are answered'
+  def test11
+    @questions = [
+      { text: 'q1', options: [{ text: 'yes' }, { text: 'no', complete_if_selected: true }] },
+      { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
+    ]
 
-#     @answers = { q0: 0, q1: 1 }
-#     assert_valid
-#   end
+    @answers = { q0: 0, q1: 1 }
+    assert_valid
+  end
 
-#   description 'it is invalid if complete_if is not a terminal answer and further questions are not answered'
-#   def test12
-#     @questions = [
-#       { text: 'q1', options: [{ text: 'yes' }, { text: 'no', complete_if_selected: true }] },
-#       { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
-#     ]
-#     @answers = { q0: 0 }
-#     assert_errors q1: 'was not answered'
-#   end
+  description 'it is invalid if complete_if is not a terminal answer and further questions are not answered'
+  def test12
+    @questions = [
+      { text: 'q1', options: [{ text: 'yes' }, { text: 'no', complete_if_selected: true }] },
+      { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
+    ]
+    @answers = { q0: 0 }
+    assert_errors q1: 'was not answered'
+  end
 
   private
 
