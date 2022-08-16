@@ -5,6 +5,7 @@ class CraqValidator
     def initialize(questions, answers)
         @questions = []
         @errors = {}
+        @valid = true
         answers ||= {}
 
         questions.each_with_index do |q, i| 
@@ -40,7 +41,7 @@ class Question
         if @answer.nil?
             @error = 'was not answered'
             return false
-        elsif !@answer.between?(1, @opts.length)
+        elsif !@answer.between?(0, @opts.length-1)
             @error = 'has an answer that is not on the list of valid answers'
             return false
         end

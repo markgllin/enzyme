@@ -16,22 +16,22 @@ class CraqValidatorTest < Test::Unit::TestCase
     assert_errors q0: 'was not answered'
   end
 
-#   description 'errors are added for all questions'
-#   def test3
-#     @questions = [
-#       { text: 'q1', options: [{ text: 'an option' }, { text: 'another option' }] },
-#       { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
-#     ]
-#     @answers = nil
-#     assert_errors q0: 'was not answered', q1: 'was not answered'
-#   end
+  description 'errors are added for all questions'
+  def test3
+    @questions = [
+      { text: 'q1', options: [{ text: 'an option' }, { text: 'another option' }] },
+      { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
+    ]
+    @answers = nil
+    assert_errors q0: 'was not answered', q1: 'was not answered'
+  end
 
-#   description 'it is valid when an answer is given'
-#   def test4
-#     @questions = [{ text: 'q1', options: [{ text: 'yes' }, { text: 'no' }] }]
-#     @answers = { q0: 0 }
-#     assert_valid
-#   end
+  description 'it is valid when an answer is given'
+  def test4
+    @questions = [{ text: 'q1', options: [{ text: 'yes' }, { text: 'no' }] }]
+    @answers = { q0: 0 }
+    assert_valid
+  end
 
 #   description 'it is valid when there are multiple options and the last option is chosen'
 #   def test5
