@@ -33,62 +33,62 @@ class CraqValidatorTest < Test::Unit::TestCase
     assert_valid
   end
 
-#   description 'it is valid when there are multiple options and the last option is chosen'
-#   def test5
-#     @questions = [{ text: 'q1', options: [{ text: 'yes' }, { text: 'no' }, { text: 'maybe' }] }]
-#     @answers = { q0: 2 }
-#     assert_valid
-#   end
+  description 'it is valid when there are multiple options and the last option is chosen'
+  def test5
+    @questions = [{ text: 'q1', options: [{ text: 'yes' }, { text: 'no' }, { text: 'maybe' }] }]
+    @answers = { q0: 2 }
+    assert_valid
+  end
 
-#   description 'it is invalid when an answer is not one of the valid answers'
-#   def test6
-#     @questions = [{ text: 'q1', options: [{ text: 'an option' }, { text: 'another option' }] }]
-#     @answers = { q0: 2 }
-#     assert_errors q0: 'has an answer that is not on the list of valid answers'
-#   end
+  description 'it is invalid when an answer is not one of the valid answers'
+  def test6
+    @questions = [{ text: 'q1', options: [{ text: 'an option' }, { text: 'another option' }] }]
+    @answers = { q0: 2 }
+    assert_errors q0: 'has an answer that is not on the list of valid answers'
+  end
 
-#   description 'it is invalid when not all the questions are answered'
-#   def test7
-#     @questions = [
-#       { text: 'q1', options: [{ text: 'an option' }, { text: 'another option' }] },
-#       { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
-#     ]
-#     @answers = { q0: 0 }
-#     assert_errors q1: 'was not answered'
-#   end
+  description 'it is invalid when not all the questions are answered'
+  def test7
+    @questions = [
+      { text: 'q1', options: [{ text: 'an option' }, { text: 'another option' }] },
+      { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
+    ]
+    @answers = { q0: 0 }
+    assert_errors q1: 'was not answered'
+  end
 
-#   description 'it is valid when all the questions are answered'
-#   def test8
-#     @questions = [
-#       { text: 'q1', options: [{ text: 'an option' }, { text: 'another option' }] },
-#       { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
-#     ]
-#     @answers = { q0: 0, q1: 0 }
-#     assert_valid
-#   end
+  description 'it is valid when all the questions are answered'
+  def test8
+    @questions = [
+      { text: 'q1', options: [{ text: 'an option' }, { text: 'another option' }] },
+      { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
+    ]
+    @answers = { q0: 0, q1: 0 }
+    assert_valid
+  end
 
-#   description 'it is valid when questions after complete_if_selected are not answered'
-#   def test9
-#     @questions = [
-#       { text: 'q1', options: [{ text: 'yes' }, { text: 'no', complete_if_selected: true }] },
-#       { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
-#     ]
-#     @answers = { q0: 1 }
-#     assert_valid
-#   end
+  description 'it is valid when questions after complete_if_selected are not answered'
+  def test9
+    @questions = [
+      { text: 'q1', options: [{ text: 'yes' }, { text: 'no', complete_if_selected: true }] },
+      { text: 'q2', options: [{ text: 'an option' }, { text: 'another option' }] }
+    ]
+    @answers = { q0: 1 }
+    assert_valid
+  end
 
-#   description 'it is invalid if questions after complete_if are answered'
-#   def test10
-#     @questions = [
-#       { text: 'q1', options: [{ text: 'yes' }, { text: 'no', complete_if_selected: true }] },
-#       { text: 'q2', options: valid_options }
-#     ]
-#     @answers = { q0: 1, q1: 0 }
+  description 'it is invalid if questions after complete_if are answered'
+  def test10
+    @questions = [
+      { text: 'q1', options: [{ text: 'yes' }, { text: 'no', complete_if_selected: true }] },
+      { text: 'q2', options: valid_options }
+    ]
+    @answers = { q0: 1, q1: 0 }
 
-#     assert_errors(
-#       q1: 'was answered even though a previous response indicated that the questions were complete'
-#     )
-#   end
+    assert_errors(
+      q1: 'was answered even though a previous response indicated that the questions were complete'
+    )
+  end
 
 #   description 'it is valid if complete_if is not a terminal answer and further questions are answered'
 #   def test11

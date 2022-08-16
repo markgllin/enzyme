@@ -2,54 +2,80 @@ class CraqValidator
 
     attr_reader :errors
 
+    ALREADY_COMPLETE = 'was answered even though a previous response indicated that the questions were complete'
+
     def initialize(questions, answers)
         @questions = []
         @errors = {}
         @valid = true
+        @completed = false
         answers ||= {}
 
-        questions.each_with_index do |q, i| 
-            @questions << Question.new(q, i, answers[:"q#{i}"])
-
-            if !@questions[i].is_valid_answer?
-                puts @questions[i].inspect
-                @valid = false
-                @errors[:"q#{i}"] = @questions[i].error
-            end
-        end
+        check_questions(questions, answers)
     end
 
     def valid?
         @valid
     end
 
+    private
+
+    def check_questions(questions, answers)
+        questions.each_with_index do |q, i| 
+            @questions << Question.new(q, answers[:"q#{i}"])
+
+            next if @completed && !@questions[i].answered?
+
+            if @completed && @questions[i].answered?
+                @errors[:"q#{i}"] = ALREADY_COMPLETE
+                puts @errors.inspect
+                @valid = false
+                next
+            end
+
+            if !@questions[i].is_valid_answer?
+                @valid = false
+                @errors[:"q#{i}"] = @questions[i].error
+            else
+                @completed = true if @questions[i].complete_if_selected?
+            end
+        end
+    end
 end
 
 class Question
 
     attr_reader :error
 
-    def initialize(question, number, answer)
-        @question_number = number
+    NOT_ANSWERED = 'was not answered'
+    INVALID_ANSWER = 'has an answer that is not on the list of valid answers'
+
+    def initialize(question, answer)
         @question = question[:text]
         @opts = question[:options]
         @answer = answer
         @error = nil
+
+        self.is_valid_answer?
     end
 
     def is_valid_answer?
-        if @answer.nil?
-            @error = 'was not answered'
+        if !answered?
+            @error = NOT_ANSWERED
             return false
         elsif !@answer.between?(0, @opts.length-1)
-            @error = 'has an answer that is not on the list of valid answers'
+            @error = INVALID_ANSWER
             return false
         end
         
         true
     end
 
-    def error
-        @error
+    def answered?
+        !@answer.nil?
+    end
+
+    def complete_if_selected?
+        !!@opts[@answer][:complete_if_selected]
     end
 end
