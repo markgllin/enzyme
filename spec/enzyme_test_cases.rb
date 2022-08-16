@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative './enzyme'
+require_relative '../lib/enzyme'
 
 class CraqValidatorTest < Test::Unit::TestCase
   description 'it is invalid with no answers'
