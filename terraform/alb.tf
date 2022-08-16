@@ -25,4 +25,8 @@ resource "aws_lb_target_group" "ecs_lb_tg" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.ecs_vpc.id
   target_type = "ip"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }

@@ -31,13 +31,13 @@ variable "container_name" {
 variable "container_port" {
   type        = string
   description = "Container port"
-  default     = "8080"
+  default     = "80"
 }
 
-variable "image_url" {
+variable "image_tag" {
   type        = string
-  description = "URL of image to use in ECS"
-  default     = "registry-1.docker.io/markgllin/python-flask-helloworld"
+  description = "tag of image to use in ECS"
+  default     = "latest"
 }
 
 variable "desired_ecs_svc_count" {

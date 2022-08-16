@@ -1,6 +1,6 @@
 FROM ruby:3.1.2-alpine3.16 as base
 
-EXPOSE 4567
+EXPOSE 80
 
 COPY . /app
 WORKDIR /app

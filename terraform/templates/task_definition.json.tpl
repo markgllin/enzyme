@@ -8,7 +8,7 @@
     "environment": [],
     "portMappings": [
         {
-          "hostPort": 8080,
+          "hostPort": ${container_port},
           "containerPort": ${container_port}
         }
     ]

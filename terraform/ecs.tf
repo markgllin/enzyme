@@ -11,7 +11,7 @@ data "template_file" "td_template" {
   template = file("./templates/task_definition.json.tpl")
   vars = {
     container_name = var.container_name
-    image          = aws_ecr_repository.enzyme.repository_url
+    image          = "${aws_ecr_repository.enzyme.repository_url}:${var.image_tag}"
     container_port = var.container_port
   }
 }

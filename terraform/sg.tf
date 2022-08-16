@@ -29,12 +29,12 @@ resource "aws_security_group" "ecs_svc_sg" {
   vpc_id = aws_vpc.ecs_vpc.id
 }
 
-resource "aws_security_group_rule" "allow_svc_port_80_ingress" {
+resource "aws_security_group_rule" "allow_svc_port_ingress" {
   security_group_id = aws_security_group.ecs_svc_sg.id
 
   type        = "ingress"
-  from_port   = 80
-  to_port     = 80
+  from_port   = var.container_port
+  to_port     = var.container_port
   protocol    = "tcp"
 
   source_security_group_id = aws_security_group.ecs_lb_sg.id
