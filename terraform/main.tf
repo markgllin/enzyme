@@ -1,12 +1,11 @@
 provider "aws" {
   profile = "default"
   region  = "us-west-1"
-  
+
   default_tags {
     tags = {
-      environment = local.environment
+      environment = var.environment
       region      = var.aws_region
-      service     = local.service_name
     }
   }
 }
